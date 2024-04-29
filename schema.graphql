@@ -1,0 +1,2663 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+columns and relationships of "Apartments"
+"""
+type Apartments {
+  AnnonsId: numeric!
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Balkong: Boolean
+  BostadSnabbt: Boolean
+  Bostadssnabben: Boolean
+  Externko: Boolean
+  Gatuadress: String
+  Hiss: Boolean
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Internko: Boolean
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  Korttid: Boolean
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Nyproduktion: Boolean
+  Senior: Boolean
+  Stadsdel: String
+  Student: Boolean
+  TillgangligNedsattOrienteringsformaga: Boolean
+  TillgangligNedsattRorelseformaga: Boolean
+  Ungdom: Boolean
+  Url: String
+  Vaning: numeric
+  Vanlig: Boolean
+  Yta: numeric
+}
+
+"""
+aggregated selection of "Apartments"
+"""
+type Apartments_aggregate {
+  aggregate: Apartments_aggregate_fields
+  nodes: [Apartments!]!
+}
+
+input Apartments_aggregate_bool_exp {
+  bool_and: Apartments_aggregate_bool_exp_bool_and
+  bool_or: Apartments_aggregate_bool_exp_bool_or
+  count: Apartments_aggregate_bool_exp_count
+}
+
+input Apartments_aggregate_bool_exp_bool_and {
+  arguments: Apartments_select_column_Apartments_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: Apartments_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input Apartments_aggregate_bool_exp_bool_or {
+  arguments: Apartments_select_column_Apartments_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: Apartments_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input Apartments_aggregate_bool_exp_count {
+  arguments: [Apartments_select_column!]
+  distinct: Boolean
+  filter: Apartments_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "Apartments"
+"""
+type Apartments_aggregate_fields {
+  avg: Apartments_avg_fields
+  count(columns: [Apartments_select_column!], distinct: Boolean): Int!
+  max: Apartments_max_fields
+  min: Apartments_min_fields
+  stddev: Apartments_stddev_fields
+  stddev_pop: Apartments_stddev_pop_fields
+  stddev_samp: Apartments_stddev_samp_fields
+  sum: Apartments_sum_fields
+  var_pop: Apartments_var_pop_fields
+  var_samp: Apartments_var_samp_fields
+  variance: Apartments_variance_fields
+}
+
+"""
+order by aggregate values of table "Apartments"
+"""
+input Apartments_aggregate_order_by {
+  avg: Apartments_avg_order_by
+  count: order_by
+  max: Apartments_max_order_by
+  min: Apartments_min_order_by
+  stddev: Apartments_stddev_order_by
+  stddev_pop: Apartments_stddev_pop_order_by
+  stddev_samp: Apartments_stddev_samp_order_by
+  sum: Apartments_sum_order_by
+  var_pop: Apartments_var_pop_order_by
+  var_samp: Apartments_var_samp_order_by
+  variance: Apartments_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Apartments"
+"""
+input Apartments_arr_rel_insert_input {
+  data: [Apartments_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Apartments_on_conflict
+}
+
+"""aggregate avg on columns"""
+type Apartments_avg_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by avg() on columns of table "Apartments"
+"""
+input Apartments_avg_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "Apartments". All fields are combined with a logical 'AND'.
+"""
+input Apartments_bool_exp {
+  AnnonsId: numeric_comparison_exp
+  AnnonseradFran: date_comparison_exp
+  AnnonseradTill: date_comparison_exp
+  Antal: numeric_comparison_exp
+  AntalRum: numeric_comparison_exp
+  Balkong: Boolean_comparison_exp
+  BostadSnabbt: Boolean_comparison_exp
+  Bostadssnabben: Boolean_comparison_exp
+  Externko: Boolean_comparison_exp
+  Gatuadress: String_comparison_exp
+  Hiss: Boolean_comparison_exp
+  HogstaAntalRum: numeric_comparison_exp
+  HogstaHyran: numeric_comparison_exp
+  HogstaYtan: numeric_comparison_exp
+  Hyra: numeric_comparison_exp
+  Internko: Boolean_comparison_exp
+  Ko: String_comparison_exp
+  KoNamn: String_comparison_exp
+  Kommun: String_comparison_exp
+  KoordinatLatitud: numeric_comparison_exp
+  KoordinatLongitud: numeric_comparison_exp
+  Korttid: Boolean_comparison_exp
+  LagenhetId: numeric_comparison_exp
+  Lagenhetstyp: String_comparison_exp
+  LagstaAntalRum: numeric_comparison_exp
+  LagstaHyran: numeric_comparison_exp
+  LagstaYtan: numeric_comparison_exp
+  Nyproduktion: Boolean_comparison_exp
+  Senior: Boolean_comparison_exp
+  Stadsdel: String_comparison_exp
+  Student: Boolean_comparison_exp
+  TillgangligNedsattOrienteringsformaga: Boolean_comparison_exp
+  TillgangligNedsattRorelseformaga: Boolean_comparison_exp
+  Ungdom: Boolean_comparison_exp
+  Url: String_comparison_exp
+  Vaning: numeric_comparison_exp
+  Vanlig: Boolean_comparison_exp
+  Yta: numeric_comparison_exp
+  _and: [Apartments_bool_exp!]
+  _not: Apartments_bool_exp
+  _or: [Apartments_bool_exp!]
+}
+
+"""
+unique or primary key constraints on table "Apartments"
+"""
+enum Apartments_constraint {
+  """
+  unique or primary key constraint on columns "AnnonsId"
+  """
+  Apartments_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "Apartments"
+"""
+input Apartments_inc_input {
+  AnnonsId: numeric
+  Antal: numeric
+  AntalRum: numeric
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  LagenhetId: numeric
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Vaning: numeric
+  Yta: numeric
+}
+
+"""
+input type for inserting data into table "Apartments"
+"""
+input Apartments_insert_input {
+  AnnonsId: numeric
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Balkong: Boolean
+  BostadSnabbt: Boolean
+  Bostadssnabben: Boolean
+  Externko: Boolean
+  Gatuadress: String
+  Hiss: Boolean
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Internko: Boolean
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  Korttid: Boolean
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Nyproduktion: Boolean
+  Senior: Boolean
+  Stadsdel: String
+  Student: Boolean
+  TillgangligNedsattOrienteringsformaga: Boolean
+  TillgangligNedsattRorelseformaga: Boolean
+  Ungdom: Boolean
+  Url: String
+  Vaning: numeric
+  Vanlig: Boolean
+  Yta: numeric
+}
+
+"""aggregate max on columns"""
+type Apartments_max_fields {
+  AnnonsId: numeric
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Gatuadress: String
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Stadsdel: String
+  Url: String
+  Vaning: numeric
+  Yta: numeric
+}
+
+"""
+order by max() on columns of table "Apartments"
+"""
+input Apartments_max_order_by {
+  AnnonsId: order_by
+  AnnonseradFran: order_by
+  AnnonseradTill: order_by
+  Antal: order_by
+  AntalRum: order_by
+  Gatuadress: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  Ko: order_by
+  KoNamn: order_by
+  Kommun: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  Lagenhetstyp: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Stadsdel: order_by
+  Url: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""aggregate min on columns"""
+type Apartments_min_fields {
+  AnnonsId: numeric
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Gatuadress: String
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Stadsdel: String
+  Url: String
+  Vaning: numeric
+  Yta: numeric
+}
+
+"""
+order by min() on columns of table "Apartments"
+"""
+input Apartments_min_order_by {
+  AnnonsId: order_by
+  AnnonseradFran: order_by
+  AnnonseradTill: order_by
+  Antal: order_by
+  AntalRum: order_by
+  Gatuadress: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  Ko: order_by
+  KoNamn: order_by
+  Kommun: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  Lagenhetstyp: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Stadsdel: order_by
+  Url: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""
+response of any mutation on the table "Apartments"
+"""
+type Apartments_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Apartments!]!
+}
+
+"""
+on_conflict condition type for table "Apartments"
+"""
+input Apartments_on_conflict {
+  constraint: Apartments_constraint!
+  update_columns: [Apartments_update_column!]! = []
+  where: Apartments_bool_exp
+}
+
+"""Ordering options when selecting data from "Apartments"."""
+input Apartments_order_by {
+  AnnonsId: order_by
+  AnnonseradFran: order_by
+  AnnonseradTill: order_by
+  Antal: order_by
+  AntalRum: order_by
+  Balkong: order_by
+  BostadSnabbt: order_by
+  Bostadssnabben: order_by
+  Externko: order_by
+  Gatuadress: order_by
+  Hiss: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  Internko: order_by
+  Ko: order_by
+  KoNamn: order_by
+  Kommun: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  Korttid: order_by
+  LagenhetId: order_by
+  Lagenhetstyp: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Nyproduktion: order_by
+  Senior: order_by
+  Stadsdel: order_by
+  Student: order_by
+  TillgangligNedsattOrienteringsformaga: order_by
+  TillgangligNedsattRorelseformaga: order_by
+  Ungdom: order_by
+  Url: order_by
+  Vaning: order_by
+  Vanlig: order_by
+  Yta: order_by
+}
+
+"""primary key columns input for table: Apartments"""
+input Apartments_pk_columns_input {
+  AnnonsId: numeric!
+}
+
+"""
+select columns of table "Apartments"
+"""
+enum Apartments_select_column {
+  """column name"""
+  AnnonsId
+
+  """column name"""
+  AnnonseradFran
+
+  """column name"""
+  AnnonseradTill
+
+  """column name"""
+  Antal
+
+  """column name"""
+  AntalRum
+
+  """column name"""
+  Balkong
+
+  """column name"""
+  BostadSnabbt
+
+  """column name"""
+  Bostadssnabben
+
+  """column name"""
+  Externko
+
+  """column name"""
+  Gatuadress
+
+  """column name"""
+  Hiss
+
+  """column name"""
+  HogstaAntalRum
+
+  """column name"""
+  HogstaHyran
+
+  """column name"""
+  HogstaYtan
+
+  """column name"""
+  Hyra
+
+  """column name"""
+  Internko
+
+  """column name"""
+  Ko
+
+  """column name"""
+  KoNamn
+
+  """column name"""
+  Kommun
+
+  """column name"""
+  KoordinatLatitud
+
+  """column name"""
+  KoordinatLongitud
+
+  """column name"""
+  Korttid
+
+  """column name"""
+  LagenhetId
+
+  """column name"""
+  Lagenhetstyp
+
+  """column name"""
+  LagstaAntalRum
+
+  """column name"""
+  LagstaHyran
+
+  """column name"""
+  LagstaYtan
+
+  """column name"""
+  Nyproduktion
+
+  """column name"""
+  Senior
+
+  """column name"""
+  Stadsdel
+
+  """column name"""
+  Student
+
+  """column name"""
+  TillgangligNedsattOrienteringsformaga
+
+  """column name"""
+  TillgangligNedsattRorelseformaga
+
+  """column name"""
+  Ungdom
+
+  """column name"""
+  Url
+
+  """column name"""
+  Vaning
+
+  """column name"""
+  Vanlig
+
+  """column name"""
+  Yta
+}
+
+"""
+select "Apartments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "Apartments"
+"""
+enum Apartments_select_column_Apartments_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  Balkong
+
+  """column name"""
+  BostadSnabbt
+
+  """column name"""
+  Bostadssnabben
+
+  """column name"""
+  Externko
+
+  """column name"""
+  Hiss
+
+  """column name"""
+  Internko
+
+  """column name"""
+  Korttid
+
+  """column name"""
+  Nyproduktion
+
+  """column name"""
+  Senior
+
+  """column name"""
+  Student
+
+  """column name"""
+  TillgangligNedsattOrienteringsformaga
+
+  """column name"""
+  TillgangligNedsattRorelseformaga
+
+  """column name"""
+  Ungdom
+
+  """column name"""
+  Vanlig
+}
+
+"""
+select "Apartments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "Apartments"
+"""
+enum Apartments_select_column_Apartments_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  Balkong
+
+  """column name"""
+  BostadSnabbt
+
+  """column name"""
+  Bostadssnabben
+
+  """column name"""
+  Externko
+
+  """column name"""
+  Hiss
+
+  """column name"""
+  Internko
+
+  """column name"""
+  Korttid
+
+  """column name"""
+  Nyproduktion
+
+  """column name"""
+  Senior
+
+  """column name"""
+  Student
+
+  """column name"""
+  TillgangligNedsattOrienteringsformaga
+
+  """column name"""
+  TillgangligNedsattRorelseformaga
+
+  """column name"""
+  Ungdom
+
+  """column name"""
+  Vanlig
+}
+
+"""
+input type for updating data in table "Apartments"
+"""
+input Apartments_set_input {
+  AnnonsId: numeric
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Balkong: Boolean
+  BostadSnabbt: Boolean
+  Bostadssnabben: Boolean
+  Externko: Boolean
+  Gatuadress: String
+  Hiss: Boolean
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Internko: Boolean
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  Korttid: Boolean
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Nyproduktion: Boolean
+  Senior: Boolean
+  Stadsdel: String
+  Student: Boolean
+  TillgangligNedsattOrienteringsformaga: Boolean
+  TillgangligNedsattRorelseformaga: Boolean
+  Ungdom: Boolean
+  Url: String
+  Vaning: numeric
+  Vanlig: Boolean
+  Yta: numeric
+}
+
+"""aggregate stddev on columns"""
+type Apartments_stddev_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by stddev() on columns of table "Apartments"
+"""
+input Apartments_stddev_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type Apartments_stddev_pop_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by stddev_pop() on columns of table "Apartments"
+"""
+input Apartments_stddev_pop_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type Apartments_stddev_samp_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by stddev_samp() on columns of table "Apartments"
+"""
+input Apartments_stddev_samp_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""
+Streaming cursor of the table "Apartments"
+"""
+input Apartments_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: Apartments_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input Apartments_stream_cursor_value_input {
+  AnnonsId: numeric
+  AnnonseradFran: date
+  AnnonseradTill: date
+  Antal: numeric
+  AntalRum: numeric
+  Balkong: Boolean
+  BostadSnabbt: Boolean
+  Bostadssnabben: Boolean
+  Externko: Boolean
+  Gatuadress: String
+  Hiss: Boolean
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  Internko: Boolean
+  Ko: String
+  KoNamn: String
+  Kommun: String
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  Korttid: Boolean
+  LagenhetId: numeric
+  Lagenhetstyp: String
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Nyproduktion: Boolean
+  Senior: Boolean
+  Stadsdel: String
+  Student: Boolean
+  TillgangligNedsattOrienteringsformaga: Boolean
+  TillgangligNedsattRorelseformaga: Boolean
+  Ungdom: Boolean
+  Url: String
+  Vaning: numeric
+  Vanlig: Boolean
+  Yta: numeric
+}
+
+"""aggregate sum on columns"""
+type Apartments_sum_fields {
+  AnnonsId: numeric
+  Antal: numeric
+  AntalRum: numeric
+  HogstaAntalRum: numeric
+  HogstaHyran: numeric
+  HogstaYtan: numeric
+  Hyra: numeric
+  KoordinatLatitud: numeric
+  KoordinatLongitud: numeric
+  LagenhetId: numeric
+  LagstaAntalRum: numeric
+  LagstaHyran: numeric
+  LagstaYtan: numeric
+  Vaning: numeric
+  Yta: numeric
+}
+
+"""
+order by sum() on columns of table "Apartments"
+"""
+input Apartments_sum_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""
+update columns of table "Apartments"
+"""
+enum Apartments_update_column {
+  """column name"""
+  AnnonsId
+
+  """column name"""
+  AnnonseradFran
+
+  """column name"""
+  AnnonseradTill
+
+  """column name"""
+  Antal
+
+  """column name"""
+  AntalRum
+
+  """column name"""
+  Balkong
+
+  """column name"""
+  BostadSnabbt
+
+  """column name"""
+  Bostadssnabben
+
+  """column name"""
+  Externko
+
+  """column name"""
+  Gatuadress
+
+  """column name"""
+  Hiss
+
+  """column name"""
+  HogstaAntalRum
+
+  """column name"""
+  HogstaHyran
+
+  """column name"""
+  HogstaYtan
+
+  """column name"""
+  Hyra
+
+  """column name"""
+  Internko
+
+  """column name"""
+  Ko
+
+  """column name"""
+  KoNamn
+
+  """column name"""
+  Kommun
+
+  """column name"""
+  KoordinatLatitud
+
+  """column name"""
+  KoordinatLongitud
+
+  """column name"""
+  Korttid
+
+  """column name"""
+  LagenhetId
+
+  """column name"""
+  Lagenhetstyp
+
+  """column name"""
+  LagstaAntalRum
+
+  """column name"""
+  LagstaHyran
+
+  """column name"""
+  LagstaYtan
+
+  """column name"""
+  Nyproduktion
+
+  """column name"""
+  Senior
+
+  """column name"""
+  Stadsdel
+
+  """column name"""
+  Student
+
+  """column name"""
+  TillgangligNedsattOrienteringsformaga
+
+  """column name"""
+  TillgangligNedsattRorelseformaga
+
+  """column name"""
+  Ungdom
+
+  """column name"""
+  Url
+
+  """column name"""
+  Vaning
+
+  """column name"""
+  Vanlig
+
+  """column name"""
+  Yta
+}
+
+input Apartments_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: Apartments_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: Apartments_set_input
+
+  """filter the rows which have to be updated"""
+  where: Apartments_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type Apartments_var_pop_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by var_pop() on columns of table "Apartments"
+"""
+input Apartments_var_pop_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""aggregate var_samp on columns"""
+type Apartments_var_samp_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by var_samp() on columns of table "Apartments"
+"""
+input Apartments_var_samp_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""aggregate variance on columns"""
+type Apartments_variance_fields {
+  AnnonsId: Float
+  Antal: Float
+  AntalRum: Float
+  HogstaAntalRum: Float
+  HogstaHyran: Float
+  HogstaYtan: Float
+  Hyra: Float
+  KoordinatLatitud: Float
+  KoordinatLongitud: Float
+  LagenhetId: Float
+  LagstaAntalRum: Float
+  LagstaHyran: Float
+  LagstaYtan: Float
+  Vaning: Float
+  Yta: Float
+}
+
+"""
+order by variance() on columns of table "Apartments"
+"""
+input Apartments_variance_order_by {
+  AnnonsId: order_by
+  Antal: order_by
+  AntalRum: order_by
+  HogstaAntalRum: order_by
+  HogstaHyran: order_by
+  HogstaYtan: order_by
+  Hyra: order_by
+  KoordinatLatitud: order_by
+  KoordinatLongitud: order_by
+  LagenhetId: order_by
+  LagstaAntalRum: order_by
+  LagstaHyran: order_by
+  LagstaYtan: order_by
+  Vaning: order_by
+  Yta: order_by
+}
+
+"""
+columns and relationships of "ApartmentTypes"
+"""
+type ApartmentTypes {
+  """
+  fetch data from the table: "Apartments"
+  """
+  Apartments(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch aggregated fields from the table: "Apartments"
+  """
+  Apartments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): Apartments_aggregate!
+  Lagenhetstyp: String!
+}
+
+"""
+aggregated selection of "ApartmentTypes"
+"""
+type ApartmentTypes_aggregate {
+  aggregate: ApartmentTypes_aggregate_fields
+  nodes: [ApartmentTypes!]!
+}
+
+"""
+aggregate fields of "ApartmentTypes"
+"""
+type ApartmentTypes_aggregate_fields {
+  count(columns: [ApartmentTypes_select_column!], distinct: Boolean): Int!
+  max: ApartmentTypes_max_fields
+  min: ApartmentTypes_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "ApartmentTypes". All fields are combined with a logical 'AND'.
+"""
+input ApartmentTypes_bool_exp {
+  Apartments: Apartments_bool_exp
+  Apartments_aggregate: Apartments_aggregate_bool_exp
+  Lagenhetstyp: String_comparison_exp
+  _and: [ApartmentTypes_bool_exp!]
+  _not: ApartmentTypes_bool_exp
+  _or: [ApartmentTypes_bool_exp!]
+}
+
+"""
+unique or primary key constraints on table "ApartmentTypes"
+"""
+enum ApartmentTypes_constraint {
+  """
+  unique or primary key constraint on columns "Lagenhetstyp"
+  """
+  ApartmentTypes_pkey
+}
+
+"""
+input type for inserting data into table "ApartmentTypes"
+"""
+input ApartmentTypes_insert_input {
+  Apartments: Apartments_arr_rel_insert_input
+  Lagenhetstyp: String
+}
+
+"""aggregate max on columns"""
+type ApartmentTypes_max_fields {
+  Lagenhetstyp: String
+}
+
+"""aggregate min on columns"""
+type ApartmentTypes_min_fields {
+  Lagenhetstyp: String
+}
+
+"""
+response of any mutation on the table "ApartmentTypes"
+"""
+type ApartmentTypes_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [ApartmentTypes!]!
+}
+
+"""
+on_conflict condition type for table "ApartmentTypes"
+"""
+input ApartmentTypes_on_conflict {
+  constraint: ApartmentTypes_constraint!
+  update_columns: [ApartmentTypes_update_column!]! = []
+  where: ApartmentTypes_bool_exp
+}
+
+"""Ordering options when selecting data from "ApartmentTypes"."""
+input ApartmentTypes_order_by {
+  Apartments_aggregate: Apartments_aggregate_order_by
+  Lagenhetstyp: order_by
+}
+
+"""primary key columns input for table: ApartmentTypes"""
+input ApartmentTypes_pk_columns_input {
+  Lagenhetstyp: String!
+}
+
+"""
+select columns of table "ApartmentTypes"
+"""
+enum ApartmentTypes_select_column {
+  """column name"""
+  Lagenhetstyp
+}
+
+"""
+input type for updating data in table "ApartmentTypes"
+"""
+input ApartmentTypes_set_input {
+  Lagenhetstyp: String
+}
+
+"""
+Streaming cursor of the table "ApartmentTypes"
+"""
+input ApartmentTypes_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: ApartmentTypes_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input ApartmentTypes_stream_cursor_value_input {
+  Lagenhetstyp: String
+}
+
+"""
+update columns of table "ApartmentTypes"
+"""
+enum ApartmentTypes_update_column {
+  """column name"""
+  Lagenhetstyp
+}
+
+input ApartmentTypes_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: ApartmentTypes_set_input
+
+  """filter the rows which have to be updated"""
+  where: ApartmentTypes_bool_exp!
+}
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""ordering argument of a cursor"""
+enum cursor_ordering {
+  """ascending ordering of the cursor"""
+  ASC
+
+  """descending ordering of the cursor"""
+  DESC
+}
+
+scalar date
+
+"""
+Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
+"""
+input date_comparison_exp {
+  _eq: date
+  _gt: date
+  _gte: date
+  _in: [date!]
+  _is_null: Boolean
+  _lt: date
+  _lte: date
+  _neq: date
+  _nin: [date!]
+}
+
+"""
+columns and relationships of "Districts"
+"""
+type Districts {
+  """
+  fetch data from the table: "Apartments"
+  """
+  Apartments(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch aggregated fields from the table: "Apartments"
+  """
+  Apartments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): Apartments_aggregate!
+  Kommun: String!
+  Stadsdel: String!
+}
+
+"""
+aggregated selection of "Districts"
+"""
+type Districts_aggregate {
+  aggregate: Districts_aggregate_fields
+  nodes: [Districts!]!
+}
+
+input Districts_aggregate_bool_exp {
+  count: Districts_aggregate_bool_exp_count
+}
+
+input Districts_aggregate_bool_exp_count {
+  arguments: [Districts_select_column!]
+  distinct: Boolean
+  filter: Districts_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "Districts"
+"""
+type Districts_aggregate_fields {
+  count(columns: [Districts_select_column!], distinct: Boolean): Int!
+  max: Districts_max_fields
+  min: Districts_min_fields
+}
+
+"""
+order by aggregate values of table "Districts"
+"""
+input Districts_aggregate_order_by {
+  count: order_by
+  max: Districts_max_order_by
+  min: Districts_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Districts"
+"""
+input Districts_arr_rel_insert_input {
+  data: [Districts_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Districts_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Districts". All fields are combined with a logical 'AND'.
+"""
+input Districts_bool_exp {
+  Apartments: Apartments_bool_exp
+  Apartments_aggregate: Apartments_aggregate_bool_exp
+  Kommun: String_comparison_exp
+  Stadsdel: String_comparison_exp
+  _and: [Districts_bool_exp!]
+  _not: Districts_bool_exp
+  _or: [Districts_bool_exp!]
+}
+
+"""
+unique or primary key constraints on table "Districts"
+"""
+enum Districts_constraint {
+  """
+  unique or primary key constraint on columns "Kommun", "Stadsdel"
+  """
+  Districts_pkey
+}
+
+"""
+input type for inserting data into table "Districts"
+"""
+input Districts_insert_input {
+  Apartments: Apartments_arr_rel_insert_input
+  Kommun: String
+  Stadsdel: String
+}
+
+"""aggregate max on columns"""
+type Districts_max_fields {
+  Kommun: String
+  Stadsdel: String
+}
+
+"""
+order by max() on columns of table "Districts"
+"""
+input Districts_max_order_by {
+  Kommun: order_by
+  Stadsdel: order_by
+}
+
+"""aggregate min on columns"""
+type Districts_min_fields {
+  Kommun: String
+  Stadsdel: String
+}
+
+"""
+order by min() on columns of table "Districts"
+"""
+input Districts_min_order_by {
+  Kommun: order_by
+  Stadsdel: order_by
+}
+
+"""
+response of any mutation on the table "Districts"
+"""
+type Districts_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Districts!]!
+}
+
+"""
+on_conflict condition type for table "Districts"
+"""
+input Districts_on_conflict {
+  constraint: Districts_constraint!
+  update_columns: [Districts_update_column!]! = []
+  where: Districts_bool_exp
+}
+
+"""Ordering options when selecting data from "Districts"."""
+input Districts_order_by {
+  Apartments_aggregate: Apartments_aggregate_order_by
+  Kommun: order_by
+  Stadsdel: order_by
+}
+
+"""primary key columns input for table: Districts"""
+input Districts_pk_columns_input {
+  Kommun: String!
+  Stadsdel: String!
+}
+
+"""
+select columns of table "Districts"
+"""
+enum Districts_select_column {
+  """column name"""
+  Kommun
+
+  """column name"""
+  Stadsdel
+}
+
+"""
+input type for updating data in table "Districts"
+"""
+input Districts_set_input {
+  Kommun: String
+  Stadsdel: String
+}
+
+"""
+Streaming cursor of the table "Districts"
+"""
+input Districts_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: Districts_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input Districts_stream_cursor_value_input {
+  Kommun: String
+  Stadsdel: String
+}
+
+"""
+update columns of table "Districts"
+"""
+enum Districts_update_column {
+  """column name"""
+  Kommun
+
+  """column name"""
+  Stadsdel
+}
+
+input Districts_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: Districts_set_input
+
+  """filter the rows which have to be updated"""
+  where: Districts_bool_exp!
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""
+columns and relationships of "Municipalities"
+"""
+type Municipalities {
+  """
+  fetch data from the table: "Apartments"
+  """
+  Apartments(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch aggregated fields from the table: "Apartments"
+  """
+  Apartments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): Apartments_aggregate!
+
+  """
+  fetch data from the table: "Districts"
+  """
+  Districts(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): [Districts!]!
+
+  """
+  fetch aggregated fields from the table: "Districts"
+  """
+  Districts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): Districts_aggregate!
+  Kommun: String!
+}
+
+"""
+aggregated selection of "Municipalities"
+"""
+type Municipalities_aggregate {
+  aggregate: Municipalities_aggregate_fields
+  nodes: [Municipalities!]!
+}
+
+"""
+aggregate fields of "Municipalities"
+"""
+type Municipalities_aggregate_fields {
+  count(columns: [Municipalities_select_column!], distinct: Boolean): Int!
+  max: Municipalities_max_fields
+  min: Municipalities_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "Municipalities". All fields are combined with a logical 'AND'.
+"""
+input Municipalities_bool_exp {
+  Apartments: Apartments_bool_exp
+  Apartments_aggregate: Apartments_aggregate_bool_exp
+  Districts: Districts_bool_exp
+  Districts_aggregate: Districts_aggregate_bool_exp
+  Kommun: String_comparison_exp
+  _and: [Municipalities_bool_exp!]
+  _not: Municipalities_bool_exp
+  _or: [Municipalities_bool_exp!]
+}
+
+"""
+unique or primary key constraints on table "Municipalities"
+"""
+enum Municipalities_constraint {
+  """
+  unique or primary key constraint on columns "Kommun"
+  """
+  Municipalities_pkey
+}
+
+"""
+input type for inserting data into table "Municipalities"
+"""
+input Municipalities_insert_input {
+  Apartments: Apartments_arr_rel_insert_input
+  Districts: Districts_arr_rel_insert_input
+  Kommun: String
+}
+
+"""aggregate max on columns"""
+type Municipalities_max_fields {
+  Kommun: String
+}
+
+"""aggregate min on columns"""
+type Municipalities_min_fields {
+  Kommun: String
+}
+
+"""
+response of any mutation on the table "Municipalities"
+"""
+type Municipalities_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Municipalities!]!
+}
+
+"""
+on_conflict condition type for table "Municipalities"
+"""
+input Municipalities_on_conflict {
+  constraint: Municipalities_constraint!
+  update_columns: [Municipalities_update_column!]! = []
+  where: Municipalities_bool_exp
+}
+
+"""Ordering options when selecting data from "Municipalities"."""
+input Municipalities_order_by {
+  Apartments_aggregate: Apartments_aggregate_order_by
+  Districts_aggregate: Districts_aggregate_order_by
+  Kommun: order_by
+}
+
+"""primary key columns input for table: Municipalities"""
+input Municipalities_pk_columns_input {
+  Kommun: String!
+}
+
+"""
+select columns of table "Municipalities"
+"""
+enum Municipalities_select_column {
+  """column name"""
+  Kommun
+}
+
+"""
+input type for updating data in table "Municipalities"
+"""
+input Municipalities_set_input {
+  Kommun: String
+}
+
+"""
+Streaming cursor of the table "Municipalities"
+"""
+input Municipalities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: Municipalities_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input Municipalities_stream_cursor_value_input {
+  Kommun: String
+}
+
+"""
+update columns of table "Municipalities"
+"""
+enum Municipalities_update_column {
+  """column name"""
+  Kommun
+}
+
+input Municipalities_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: Municipalities_set_input
+
+  """filter the rows which have to be updated"""
+  where: Municipalities_bool_exp!
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "ApartmentTypes"
+  """
+  delete_ApartmentTypes(
+    """filter the rows which have to be deleted"""
+    where: ApartmentTypes_bool_exp!
+  ): ApartmentTypes_mutation_response
+
+  """
+  delete single row from the table: "ApartmentTypes"
+  """
+  delete_ApartmentTypes_by_pk(Lagenhetstyp: String!): ApartmentTypes
+
+  """
+  delete data from the table: "Apartments"
+  """
+  delete_Apartments(
+    """filter the rows which have to be deleted"""
+    where: Apartments_bool_exp!
+  ): Apartments_mutation_response
+
+  """
+  delete single row from the table: "Apartments"
+  """
+  delete_Apartments_by_pk(AnnonsId: numeric!): Apartments
+
+  """
+  delete data from the table: "Districts"
+  """
+  delete_Districts(
+    """filter the rows which have to be deleted"""
+    where: Districts_bool_exp!
+  ): Districts_mutation_response
+
+  """
+  delete single row from the table: "Districts"
+  """
+  delete_Districts_by_pk(Kommun: String!, Stadsdel: String!): Districts
+
+  """
+  delete data from the table: "Municipalities"
+  """
+  delete_Municipalities(
+    """filter the rows which have to be deleted"""
+    where: Municipalities_bool_exp!
+  ): Municipalities_mutation_response
+
+  """
+  delete single row from the table: "Municipalities"
+  """
+  delete_Municipalities_by_pk(Kommun: String!): Municipalities
+
+  """
+  insert data into the table: "ApartmentTypes"
+  """
+  insert_ApartmentTypes(
+    """the rows to be inserted"""
+    objects: [ApartmentTypes_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: ApartmentTypes_on_conflict
+  ): ApartmentTypes_mutation_response
+
+  """
+  insert a single row into the table: "ApartmentTypes"
+  """
+  insert_ApartmentTypes_one(
+    """the row to be inserted"""
+    object: ApartmentTypes_insert_input!
+
+    """upsert condition"""
+    on_conflict: ApartmentTypes_on_conflict
+  ): ApartmentTypes
+
+  """
+  insert data into the table: "Apartments"
+  """
+  insert_Apartments(
+    """the rows to be inserted"""
+    objects: [Apartments_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Apartments_on_conflict
+  ): Apartments_mutation_response
+
+  """
+  insert a single row into the table: "Apartments"
+  """
+  insert_Apartments_one(
+    """the row to be inserted"""
+    object: Apartments_insert_input!
+
+    """upsert condition"""
+    on_conflict: Apartments_on_conflict
+  ): Apartments
+
+  """
+  insert data into the table: "Districts"
+  """
+  insert_Districts(
+    """the rows to be inserted"""
+    objects: [Districts_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Districts_on_conflict
+  ): Districts_mutation_response
+
+  """
+  insert a single row into the table: "Districts"
+  """
+  insert_Districts_one(
+    """the row to be inserted"""
+    object: Districts_insert_input!
+
+    """upsert condition"""
+    on_conflict: Districts_on_conflict
+  ): Districts
+
+  """
+  insert data into the table: "Municipalities"
+  """
+  insert_Municipalities(
+    """the rows to be inserted"""
+    objects: [Municipalities_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Municipalities_on_conflict
+  ): Municipalities_mutation_response
+
+  """
+  insert a single row into the table: "Municipalities"
+  """
+  insert_Municipalities_one(
+    """the row to be inserted"""
+    object: Municipalities_insert_input!
+
+    """upsert condition"""
+    on_conflict: Municipalities_on_conflict
+  ): Municipalities
+
+  """
+  update data of the table: "ApartmentTypes"
+  """
+  update_ApartmentTypes(
+    """sets the columns of the filtered rows to the given values"""
+    _set: ApartmentTypes_set_input
+
+    """filter the rows which have to be updated"""
+    where: ApartmentTypes_bool_exp!
+  ): ApartmentTypes_mutation_response
+
+  """
+  update single row of the table: "ApartmentTypes"
+  """
+  update_ApartmentTypes_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: ApartmentTypes_set_input
+    pk_columns: ApartmentTypes_pk_columns_input!
+  ): ApartmentTypes
+
+  """
+  update multiples rows of table: "ApartmentTypes"
+  """
+  update_ApartmentTypes_many(
+    """updates to execute, in order"""
+    updates: [ApartmentTypes_updates!]!
+  ): [ApartmentTypes_mutation_response]
+
+  """
+  update data of the table: "Apartments"
+  """
+  update_Apartments(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: Apartments_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Apartments_set_input
+
+    """filter the rows which have to be updated"""
+    where: Apartments_bool_exp!
+  ): Apartments_mutation_response
+
+  """
+  update single row of the table: "Apartments"
+  """
+  update_Apartments_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: Apartments_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Apartments_set_input
+    pk_columns: Apartments_pk_columns_input!
+  ): Apartments
+
+  """
+  update multiples rows of table: "Apartments"
+  """
+  update_Apartments_many(
+    """updates to execute, in order"""
+    updates: [Apartments_updates!]!
+  ): [Apartments_mutation_response]
+
+  """
+  update data of the table: "Districts"
+  """
+  update_Districts(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Districts_set_input
+
+    """filter the rows which have to be updated"""
+    where: Districts_bool_exp!
+  ): Districts_mutation_response
+
+  """
+  update single row of the table: "Districts"
+  """
+  update_Districts_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Districts_set_input
+    pk_columns: Districts_pk_columns_input!
+  ): Districts
+
+  """
+  update multiples rows of table: "Districts"
+  """
+  update_Districts_many(
+    """updates to execute, in order"""
+    updates: [Districts_updates!]!
+  ): [Districts_mutation_response]
+
+  """
+  update data of the table: "Municipalities"
+  """
+  update_Municipalities(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Municipalities_set_input
+
+    """filter the rows which have to be updated"""
+    where: Municipalities_bool_exp!
+  ): Municipalities_mutation_response
+
+  """
+  update single row of the table: "Municipalities"
+  """
+  update_Municipalities_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Municipalities_set_input
+    pk_columns: Municipalities_pk_columns_input!
+  ): Municipalities
+
+  """
+  update multiples rows of table: "Municipalities"
+  """
+  update_Municipalities_many(
+    """updates to execute, in order"""
+    updates: [Municipalities_updates!]!
+  ): [Municipalities_mutation_response]
+}
+
+scalar numeric
+
+"""
+Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'.
+"""
+input numeric_comparison_exp {
+  _eq: numeric
+  _gt: numeric
+  _gte: numeric
+  _in: [numeric!]
+  _is_null: Boolean
+  _lt: numeric
+  _lte: numeric
+  _neq: numeric
+  _nin: [numeric!]
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "ApartmentTypes"
+  """
+  ApartmentTypes(
+    """distinct select on columns"""
+    distinct_on: [ApartmentTypes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ApartmentTypes_order_by!]
+
+    """filter the rows returned"""
+    where: ApartmentTypes_bool_exp
+  ): [ApartmentTypes!]!
+
+  """
+  fetch aggregated fields from the table: "ApartmentTypes"
+  """
+  ApartmentTypes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ApartmentTypes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ApartmentTypes_order_by!]
+
+    """filter the rows returned"""
+    where: ApartmentTypes_bool_exp
+  ): ApartmentTypes_aggregate!
+
+  """fetch data from the table: "ApartmentTypes" using primary key columns"""
+  ApartmentTypes_by_pk(Lagenhetstyp: String!): ApartmentTypes
+
+  """
+  fetch data from the table: "Apartments"
+  """
+  Apartments(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch aggregated fields from the table: "Apartments"
+  """
+  Apartments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): Apartments_aggregate!
+
+  """fetch data from the table: "Apartments" using primary key columns"""
+  Apartments_by_pk(AnnonsId: numeric!): Apartments
+
+  """
+  fetch data from the table: "Districts"
+  """
+  Districts(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): [Districts!]!
+
+  """
+  fetch aggregated fields from the table: "Districts"
+  """
+  Districts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): Districts_aggregate!
+
+  """fetch data from the table: "Districts" using primary key columns"""
+  Districts_by_pk(Kommun: String!, Stadsdel: String!): Districts
+
+  """
+  fetch data from the table: "Municipalities"
+  """
+  Municipalities(
+    """distinct select on columns"""
+    distinct_on: [Municipalities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Municipalities_order_by!]
+
+    """filter the rows returned"""
+    where: Municipalities_bool_exp
+  ): [Municipalities!]!
+
+  """
+  fetch aggregated fields from the table: "Municipalities"
+  """
+  Municipalities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Municipalities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Municipalities_order_by!]
+
+    """filter the rows returned"""
+    where: Municipalities_bool_exp
+  ): Municipalities_aggregate!
+
+  """fetch data from the table: "Municipalities" using primary key columns"""
+  Municipalities_by_pk(Kommun: String!): Municipalities
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "ApartmentTypes"
+  """
+  ApartmentTypes(
+    """distinct select on columns"""
+    distinct_on: [ApartmentTypes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ApartmentTypes_order_by!]
+
+    """filter the rows returned"""
+    where: ApartmentTypes_bool_exp
+  ): [ApartmentTypes!]!
+
+  """
+  fetch aggregated fields from the table: "ApartmentTypes"
+  """
+  ApartmentTypes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [ApartmentTypes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [ApartmentTypes_order_by!]
+
+    """filter the rows returned"""
+    where: ApartmentTypes_bool_exp
+  ): ApartmentTypes_aggregate!
+
+  """fetch data from the table: "ApartmentTypes" using primary key columns"""
+  ApartmentTypes_by_pk(Lagenhetstyp: String!): ApartmentTypes
+
+  """
+  fetch data from the table in a streaming manner: "ApartmentTypes"
+  """
+  ApartmentTypes_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [ApartmentTypes_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: ApartmentTypes_bool_exp
+  ): [ApartmentTypes!]!
+
+  """
+  fetch data from the table: "Apartments"
+  """
+  Apartments(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch aggregated fields from the table: "Apartments"
+  """
+  Apartments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Apartments_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Apartments_order_by!]
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): Apartments_aggregate!
+
+  """fetch data from the table: "Apartments" using primary key columns"""
+  Apartments_by_pk(AnnonsId: numeric!): Apartments
+
+  """
+  fetch data from the table in a streaming manner: "Apartments"
+  """
+  Apartments_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [Apartments_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: Apartments_bool_exp
+  ): [Apartments!]!
+
+  """
+  fetch data from the table: "Districts"
+  """
+  Districts(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): [Districts!]!
+
+  """
+  fetch aggregated fields from the table: "Districts"
+  """
+  Districts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Districts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Districts_order_by!]
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): Districts_aggregate!
+
+  """fetch data from the table: "Districts" using primary key columns"""
+  Districts_by_pk(Kommun: String!, Stadsdel: String!): Districts
+
+  """
+  fetch data from the table in a streaming manner: "Districts"
+  """
+  Districts_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [Districts_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: Districts_bool_exp
+  ): [Districts!]!
+
+  """
+  fetch data from the table: "Municipalities"
+  """
+  Municipalities(
+    """distinct select on columns"""
+    distinct_on: [Municipalities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Municipalities_order_by!]
+
+    """filter the rows returned"""
+    where: Municipalities_bool_exp
+  ): [Municipalities!]!
+
+  """
+  fetch aggregated fields from the table: "Municipalities"
+  """
+  Municipalities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Municipalities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Municipalities_order_by!]
+
+    """filter the rows returned"""
+    where: Municipalities_bool_exp
+  ): Municipalities_aggregate!
+
+  """fetch data from the table: "Municipalities" using primary key columns"""
+  Municipalities_by_pk(Kommun: String!): Municipalities
+
+  """
+  fetch data from the table in a streaming manner: "Municipalities"
+  """
+  Municipalities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [Municipalities_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: Municipalities_bool_exp
+  ): [Municipalities!]!
+}
+
